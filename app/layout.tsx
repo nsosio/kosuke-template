@@ -23,8 +23,8 @@ const ogImageSquare = `${baseUrl}/og-image-square.png`;
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    template: '%s | Kosuke Template',
-    default: 'Kosuke Template',
+    template: '%s | VAMOS PANOS',
+    default: 'VAMOS PANOS',
   },
   description:
     'Production-ready Next.js template with auth, billing, database, and deployment. Skip the boilerplate and ship features fast.',

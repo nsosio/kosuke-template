@@ -17,7 +17,7 @@ const HomepageStructuredData = () => {
   const websiteData = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'Kosuke Template',
+    name: 'VAMOS PANOS',
     description:
       'Production-ready Next.js template with auth, billing, database, and deployment. Skip the boilerplate and ship features fast.',
     url: baseUrl,
@@ -27,7 +27,7 @@ const HomepageStructuredData = () => {
   const softwareData = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    name: 'Kosuke Template',
+    name: 'VAMOS PANOS',
     applicationCategory: 'DeveloperApplication',
     operatingSystem: 'Web Browser',
     description:
