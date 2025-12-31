@@ -189,8 +189,6 @@ async function seed() {
     // Step 7: Create tasks
     console.log('📝 Creating tasks...');
 
-    const taskPriorities: TaskPriority[] = ['low', 'medium', 'high', 'urgent'];
-
     // Helper function to get a realistic priority distribution
     // ~20-25% urgent, rest distributed among low/medium/high
     const getRandomPriority = (): TaskPriority => {
