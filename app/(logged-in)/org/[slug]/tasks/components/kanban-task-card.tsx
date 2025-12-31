@@ -13,6 +13,7 @@ import { AlertCircle, Calendar, MoreVertical, Pencil, Trash2 } from 'lucide-reac
 import type { AppRouter } from '@/lib/trpc/router';
 import { cn } from '@/lib/utils';
 
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -33,6 +34,13 @@ interface KanbanTaskCardProps {
   onDelete: (id: string) => void;
   onToggleComplete: (input: UpdateTaskInput) => void;
 }
+
+const priorityColors = {
+  low: 'bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20',
+  medium: 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20',
+  high: 'bg-red-500/10 text-red-700 dark:text-red-400 border-red-500/20',
+  urgent: 'bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-500/20',
+};
 
 export function KanbanTaskCard({ task, onEdit, onDelete, onToggleComplete }: KanbanTaskCardProps) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
@@ -95,18 +103,23 @@ export function KanbanTaskCard({ task, onEdit, onDelete, onToggleComplete }: Kan
         )}
 
         {/* Footer with priority and due date */}
-        {task.dueDate && (
-          <div
-            className={cn(
-              'text-muted-foreground mt-2 flex items-center gap-1 text-xs',
-              isOverdue && !task.completed && 'text-red-600 dark:text-red-400'
-            )}
-          >
-            {isOverdue && !task.completed && <AlertCircle className="h-3 w-3" />}
-            <Calendar className="h-3 w-3" />
-            <span>{format(new Date(task.dueDate), 'MMM d, yyyy')}</span>
-          </div>
-        )}
+        <div className="mt-2 flex items-center gap-2">
+          <Badge variant="outline" className={cn('text-xs', priorityColors[task.priority])}>
+            {task.priority}
+          </Badge>
+          {task.dueDate && (
+            <div
+              className={cn(
+                'text-muted-foreground flex items-center gap-1 text-xs',
+                isOverdue && !task.completed && 'text-red-600 dark:text-red-400'
+              )}
+            >
+              {isOverdue && !task.completed && <AlertCircle className="h-3 w-3" />}
+              <Calendar className="h-3 w-3" />
+              <span>{format(new Date(task.dueDate), 'MMM d, yyyy')}</span>
+            </div>
+          )}
+        </div>
       </CardContent>
     </Card>
   );
