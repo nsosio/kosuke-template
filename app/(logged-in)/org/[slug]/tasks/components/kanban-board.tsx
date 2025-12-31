@@ -47,6 +47,7 @@ const PRIORITY_COLUMNS: { id: TaskPriority; title: string }[] = [
   { id: 'low', title: 'Low Priority' },
   { id: 'medium', title: 'Medium Priority' },
   { id: 'high', title: 'High Priority' },
+  { id: 'urgent', title: 'Urgent Priority' },
 ];
 
 function DroppableColumn({

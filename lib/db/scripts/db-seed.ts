@@ -189,28 +189,79 @@ async function seed() {
     // Step 7: Create tasks
     console.log('📝 Creating tasks...');
 
-    const taskPriorities: TaskPriority[] = ['low', 'medium', 'high'];
+    const taskPriorities: TaskPriority[] = ['low', 'medium', 'high', 'urgent'];
 
-    // Personal tasks for Jane
-    const janePersonalTasks: NewTask[] = Array.from({ length: 5 }, (_, i) => ({
-      userId: janeUser.id,
-      title: faker.lorem.sentence({ min: 3, max: 6 }),
-      description: faker.lorem.paragraph(),
-      completed: i % 3 === 0 ? 'true' : 'false',
-      priority: taskPriorities[i % 3],
-      dueDate: faker.date.future(),
-    }));
+    // Personal tasks for Jane (including 2 urgent tasks)
+    const janePersonalTasks: NewTask[] = [
+      // Urgent personal tasks
+      {
+        userId: janeUser.id,
+        title: faker.lorem.sentence({ min: 3, max: 6 }),
+        description: faker.lorem.paragraph(),
+        completed: 'false',
+        priority: 'urgent',
+        dueDate: faker.date.soon({ days: 2 }), // Due soon
+      },
+      {
+        userId: janeUser.id,
+        title: faker.lorem.sentence({ min: 3, max: 6 }),
+        description: faker.lorem.paragraph(),
+        completed: 'false',
+        priority: 'urgent',
+        dueDate: faker.date.soon({ days: 3 }), // Due soon
+      },
+      // Regular priority tasks
+      ...Array.from({ length: 3 }, (_, i) => ({
+        userId: janeUser.id,
+        title: faker.lorem.sentence({ min: 3, max: 6 }),
+        description: faker.lorem.paragraph(),
+        completed: i % 3 === 0 ? 'true' : 'false',
+        priority: taskPriorities[i % 3], // low, medium, high
+        dueDate: faker.date.future(),
+      })),
+    ];
 
-    // Organization tasks for org1
-    const org1Tasks: NewTask[] = Array.from({ length: 5 }, (_, i) => ({
-      userId: i % 2 === 0 ? janeUser.id : johnUser.id,
-      organizationId: insertedOrg1.id,
-      title: faker.lorem.sentence({ min: 3, max: 6 }),
-      description: faker.lorem.paragraph(),
-      completed: i % 4 === 0 ? 'true' : 'false',
-      priority: taskPriorities[i % 3],
-      dueDate: faker.date.future(),
-    }));
+    // Organization tasks for org1 (including 3 urgent tasks)
+    const org1Tasks: NewTask[] = [
+      // Urgent organization tasks
+      {
+        userId: janeUser.id,
+        organizationId: insertedOrg1.id,
+        title: faker.lorem.sentence({ min: 3, max: 6 }),
+        description: faker.lorem.paragraph(),
+        completed: 'false',
+        priority: 'urgent',
+        dueDate: faker.date.soon({ days: 1 }), // Due very soon
+      },
+      {
+        userId: johnUser.id,
+        organizationId: insertedOrg1.id,
+        title: faker.lorem.sentence({ min: 3, max: 6 }),
+        description: faker.lorem.paragraph(),
+        completed: 'false',
+        priority: 'urgent',
+        dueDate: faker.date.soon({ days: 2 }), // Due soon
+      },
+      {
+        userId: janeUser.id,
+        organizationId: insertedOrg1.id,
+        title: faker.lorem.sentence({ min: 3, max: 6 }),
+        description: faker.lorem.paragraph(),
+        completed: 'false',
+        priority: 'urgent',
+        dueDate: faker.date.soon({ days: 3 }), // Due soon
+      },
+      // Regular priority tasks
+      ...Array.from({ length: 2 }, (_, i) => ({
+        userId: i % 2 === 0 ? janeUser.id : johnUser.id,
+        organizationId: insertedOrg1.id,
+        title: faker.lorem.sentence({ min: 3, max: 6 }),
+        description: faker.lorem.paragraph(),
+        completed: i % 2 === 0 ? 'true' : 'false',
+        priority: taskPriorities[i % 3], // low, medium, high
+        dueDate: faker.date.future(),
+      })),
+    ];
 
     // Personal tasks for John
     const johnPersonalTasks: NewTask[] = Array.from({ length: 5 }, (_, i) => ({
