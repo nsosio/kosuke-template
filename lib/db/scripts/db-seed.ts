@@ -189,15 +189,25 @@ async function seed() {
     // Step 7: Create tasks
     console.log('📝 Creating tasks...');
 
-    const taskPriorities: TaskPriority[] = ['low', 'medium', 'high'];
+    const taskPriorities: TaskPriority[] = ['low', 'medium', 'high', 'urgent'];
+
+    // Helper function to get a realistic priority distribution
+    // ~20-25% urgent, rest distributed among low/medium/high
+    const getRandomPriority = (): TaskPriority => {
+      const rand = Math.random();
+      if (rand < 0.22) return 'urgent'; // ~22% urgent
+      if (rand < 0.48) return 'high'; // ~26% high
+      if (rand < 0.74) return 'medium'; // ~26% medium
+      return 'low'; // ~26% low
+    };
 
     // Personal tasks for Jane
-    const janePersonalTasks: NewTask[] = Array.from({ length: 5 }, (_, i) => ({
+    const janePersonalTasks: NewTask[] = Array.from({ length: 5 }, () => ({
       userId: janeUser.id,
       title: faker.lorem.sentence({ min: 3, max: 6 }),
       description: faker.lorem.paragraph(),
-      completed: i % 3 === 0 ? 'true' : 'false',
-      priority: taskPriorities[i % 3],
+      completed: Math.random() < 0.33 ? 'true' : 'false',
+      priority: getRandomPriority(),
       dueDate: faker.date.future(),
     }));
 
@@ -207,29 +217,29 @@ async function seed() {
       organizationId: insertedOrg1.id,
       title: faker.lorem.sentence({ min: 3, max: 6 }),
       description: faker.lorem.paragraph(),
-      completed: i % 4 === 0 ? 'true' : 'false',
-      priority: taskPriorities[i % 3],
+      completed: Math.random() < 0.25 ? 'true' : 'false',
+      priority: getRandomPriority(),
       dueDate: faker.date.future(),
     }));
 
     // Personal tasks for John
-    const johnPersonalTasks: NewTask[] = Array.from({ length: 5 }, (_, i) => ({
+    const johnPersonalTasks: NewTask[] = Array.from({ length: 5 }, () => ({
       userId: johnUser.id,
       title: faker.lorem.sentence({ min: 3, max: 6 }),
       description: faker.lorem.paragraph(),
-      completed: i % 2 === 0 ? 'true' : 'false',
-      priority: taskPriorities[i % 3],
+      completed: Math.random() < 0.5 ? 'true' : 'false',
+      priority: getRandomPriority(),
       dueDate: faker.date.future(),
     }));
 
     // Organization tasks for org2
-    const org2Tasks: NewTask[] = Array.from({ length: 5 }, (_, i) => ({
+    const org2Tasks: NewTask[] = Array.from({ length: 5 }, () => ({
       userId: johnUser.id,
       organizationId: insertedOrg2.id,
       title: faker.lorem.sentence({ min: 3, max: 6 }),
       description: faker.lorem.paragraph(),
-      completed: i % 3 === 0 ? 'true' : 'false',
-      priority: taskPriorities[i % 3],
+      completed: Math.random() < 0.33 ? 'true' : 'false',
+      priority: getRandomPriority(),
       dueDate: faker.date.future(),
     }));
 
