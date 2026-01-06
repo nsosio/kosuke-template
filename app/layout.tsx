@@ -23,8 +23,8 @@ const ogImageSquare = `${baseUrl}/og-image-square.png`;
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    template: '%s | Kosuke Template',
-    default: 'Kosuke Template',
+    template: '%s | VAMOS PANOS',
+    default: 'VAMOS PANOS',
   },
   description:
     'Production-ready Next.js template with auth, billing, database, and deployment. Skip the boilerplate and ship features fast.',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   creator: 'Kosuke Template',
   publisher: 'Kosuke Template',
   openGraph: {
-    title: 'Kosuke Template - Production-Ready Next.js Starter',
+    title: 'VAMOS PANOS - Production-Ready Next.js Starter',
     description:
       'Production-ready Next.js template with auth, billing, database, and deployment. Skip the boilerplate and ship features fast.',
     type: 'website',
@@ -53,19 +53,19 @@ export const metadata: Metadata = {
         url: ogImage,
         width: 1200,
         height: 630,
-        alt: 'Kosuke Template - Production-Ready Next.js Starter',
+        alt: 'VAMOS PANOS - Production-Ready Next.js Starter',
       },
       {
         url: ogImageSquare,
         width: 500,
         height: 500,
-        alt: 'Kosuke Template - Production-Ready Next.js Starter',
+        alt: 'VAMOS PANOS - Production-Ready Next.js Starter',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Kosuke Template - Production-Ready Next.js Starter',
+    title: 'VAMOS PANOS - Production-Ready Next.js Starter',
     description:
       'Production-ready Next.js template with auth, billing, database, and deployment. Skip the boilerplate and ship features fast.',
     images: [
@@ -73,7 +73,7 @@ export const metadata: Metadata = {
         url: ogImage,
         width: 1200,
         height: 630,
-        alt: 'Kosuke Template - Production-Ready Next.js Starter',
+        alt: 'VAMOS PANOS - Production-Ready Next.js Starter',
       },
     ],
   },
