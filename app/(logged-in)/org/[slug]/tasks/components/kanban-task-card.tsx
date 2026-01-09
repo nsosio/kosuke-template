@@ -30,10 +30,10 @@ type Task = RouterOutput['tasks']['list'][number];
 type UpdateTaskInput = RouterInput['tasks']['update'];
 
 const priorityColors = {
-  low: 'bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20',
-  medium: 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20',
-  high: 'bg-red-500/10 text-red-700 dark:text-red-400 border-red-500/20',
-  urgent: 'bg-red-600/20 text-red-800 dark:text-red-300 border-red-600/40 font-semibold',
+  low: 'bg-muted/50 text-muted-foreground border-border',
+  medium: 'bg-accent/50 text-accent-foreground border-accent',
+  high: 'bg-destructive/10 text-destructive border-destructive/20',
+  urgent: 'bg-destructive/20 text-destructive border-destructive/30 font-semibold',
 };
 
 interface KanbanTaskCardProps {
@@ -113,7 +113,7 @@ export function KanbanTaskCard({ task, onEdit, onDelete, onToggleComplete }: Kan
           <div
             className={cn(
               'text-muted-foreground mt-2 flex items-center gap-1 text-xs',
-              isOverdue && !task.completed && 'text-red-600 dark:text-red-400'
+              isOverdue && !task.completed && 'text-destructive'
             )}
           >
             {isOverdue && !task.completed && <AlertCircle className="h-3 w-3" />}
