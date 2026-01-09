@@ -13,6 +13,7 @@ import { AlertCircle, Calendar, MoreVertical, Pencil, Trash2 } from 'lucide-reac
 import type { AppRouter } from '@/lib/trpc/router';
 import { cn } from '@/lib/utils';
 
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -27,6 +28,14 @@ type RouterOutput = inferRouterOutputs<AppRouter>;
 type RouterInput = inferRouterInputs<AppRouter>;
 type Task = RouterOutput['tasks']['list'][number];
 type UpdateTaskInput = RouterInput['tasks']['update'];
+
+const priorityColors = {
+  low: 'bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20',
+  medium: 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20',
+  high: 'bg-red-500/10 text-red-700 dark:text-red-400 border-red-500/20',
+  urgent: 'bg-red-600/20 text-red-800 dark:text-red-300 border-red-600/40 font-semibold',
+};
+
 interface KanbanTaskCardProps {
   task: Task;
   onEdit: (id: string) => void;
@@ -95,6 +104,11 @@ export function KanbanTaskCard({ task, onEdit, onDelete, onToggleComplete }: Kan
         )}
 
         {/* Footer with priority and due date */}
+        <div className="flex items-center gap-2 pt-2">
+          <Badge variant="outline" className={cn('text-xs', priorityColors[task.priority])}>
+            {task.priority}
+          </Badge>
+        </div>
         {task.dueDate && (
           <div
             className={cn(
