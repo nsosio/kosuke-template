@@ -189,7 +189,7 @@ async function seed() {
     // Step 7: Create tasks
     console.log('📝 Creating tasks...');
 
-    const taskPriorities: TaskPriority[] = ['low', 'medium', 'high'];
+    const taskPriorities: TaskPriority[] = ['low', 'medium', 'high', 'urgent'];
 
     // Personal tasks for Jane
     const janePersonalTasks: NewTask[] = Array.from({ length: 5 }, (_, i) => ({
