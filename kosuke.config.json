@@ -4,6 +4,7 @@
       "nextjs": {
         "type": "bun",
         "directory": ".",
+        "develop_command": "bun run dev",
         "is_entrypoint": true,
         "external_connection_variable": "NEXT_PUBLIC_APP_URL"
       }
