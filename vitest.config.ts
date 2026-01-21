@@ -8,7 +8,6 @@ export default defineConfig({
   test: {
     globals: true, // Enables global APIs (describe, it, expect)
     environment: 'jsdom',
-    pool: 'forks', // <-- Add this line - fixes Docker container compatibility
     setupFiles: ['./vitest.setup.ts'],
     include: ['__tests__/**/*.{test,spec}.{ts,tsx}'],
     exclude: ['**/node_modules/**', '**/.next/**', '__tests__/setup/**'],
