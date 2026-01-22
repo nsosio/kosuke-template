@@ -55,7 +55,8 @@ export function KanbanTaskCard({ task, onEdit, onDelete, onToggleComplete }: Kan
         'relative cursor-grab py-4 transition-all duration-200 active:cursor-grabbing',
         isDragging && 'opacity-50 shadow-lg',
         isCompleted && 'opacity-60',
-        'hover:shadow-md'
+        'hover:shadow-md',
+        task.priority === 'urgent' && 'border-l-4 border-l-purple-500'
       )}
       {...attributes}
       {...listeners}

@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
-import { CalendarIcon } from 'lucide-react';
+import { CalendarIcon, Flame } from 'lucide-react';
 import { z } from 'zod';
 
 import { createTaskSchema } from '@/lib/trpc/schemas/tasks';
@@ -147,6 +147,12 @@ export function TaskDialog({
                         <SelectItem value="low">Low</SelectItem>
                         <SelectItem value="medium">Medium</SelectItem>
                         <SelectItem value="high">High</SelectItem>
+                        <SelectItem value="urgent">
+                          <div className="flex items-center">
+                            <Flame className="mr-2 h-4 w-4" />
+                            Urgent
+                          </div>
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />

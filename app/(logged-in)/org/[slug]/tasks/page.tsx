@@ -8,7 +8,7 @@
 import { useMemo, useState } from 'react';
 
 import { useViewModeStore } from '@/store/use-view-mode';
-import { LayoutGrid, List, Plus } from 'lucide-react';
+import { Flame, LayoutGrid, List, Plus } from 'lucide-react';
 import { z } from 'zod';
 
 import { TaskDialog } from '@/app/(logged-in)/org/[slug]/tasks/components/task-dialog';
@@ -186,6 +186,12 @@ export default function OrgTasksPage() {
               <SelectItem value="low">Low</SelectItem>
               <SelectItem value="medium">Medium</SelectItem>
               <SelectItem value="high">High</SelectItem>
+              <SelectItem value="urgent">
+                <div className="flex items-center">
+                  <Flame className="mr-2 h-4 w-4" />
+                  Urgent
+                </div>
+              </SelectItem>
             </SelectContent>
           </Select>
           <Button onClick={() => setCreateDialogOpen(true)} className="whitespace-nowrap">
