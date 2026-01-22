@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import type { inferRouterInputs } from '@trpc/server';
 import { format } from 'date-fns';
-import { AlertCircle, Calendar, MoreVertical, Pencil, Trash2 } from 'lucide-react';
+import { AlertCircle, AlertTriangle, Calendar, MoreVertical, Pencil, Trash2 } from 'lucide-react';
 
 import type { AppRouter } from '@/lib/trpc/router';
 import type { TaskPriority } from '@/lib/types';
@@ -90,6 +90,7 @@ export function TaskItem({
           )}
           <div className="flex items-center gap-2 pt-1">
             <Badge variant="outline" className={priorityColors[priority]}>
+              {priority === 'urgent' && <AlertTriangle className="mr-1 h-3 w-3" />}
               {priority}
             </Badge>
             {dueDate && (
