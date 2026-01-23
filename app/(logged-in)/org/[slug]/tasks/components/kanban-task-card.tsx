@@ -8,7 +8,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server';
 import { format } from 'date-fns';
-import { AlertCircle, Calendar, MoreVertical, Pencil, Trash2 } from 'lucide-react';
+import { AlertCircle, AlertTriangle, Calendar, MoreVertical, Pencil, Trash2 } from 'lucide-react';
 
 import type { AppRouter } from '@/lib/trpc/router';
 import { cn } from '@/lib/utils';
@@ -55,7 +55,8 @@ export function KanbanTaskCard({ task, onEdit, onDelete, onToggleComplete }: Kan
         'relative cursor-grab py-4 transition-all duration-200 active:cursor-grabbing',
         isDragging && 'opacity-50 shadow-lg',
         isCompleted && 'opacity-60',
-        'hover:shadow-md'
+        'hover:shadow-md',
+        task.priority === 'urgent' && 'border-orange-500/50'
       )}
       {...attributes}
       {...listeners}
@@ -86,6 +87,9 @@ export function KanbanTaskCard({ task, onEdit, onDelete, onToggleComplete }: Kan
             checked={task.completed}
             onCheckedChange={() => onToggleComplete({ id: task.id, completed: !task.completed })}
           />
+          {task.priority === 'urgent' && (
+            <AlertTriangle className="h-4 w-4 shrink-0 text-orange-600 dark:text-orange-400" />
+          )}
           <h4 className={cn('text-sm leading-tight font-medium')}>{task.title}</h4>
         </div>
         {task.description && (
