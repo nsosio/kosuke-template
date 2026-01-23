@@ -38,10 +38,10 @@ interface TaskItemProps {
 }
 
 const priorityColors = {
-  low: 'bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20',
-  medium: 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20',
-  high: 'bg-red-500/10 text-red-700 dark:text-red-400 border-red-500/20',
-  urgent: 'bg-destructive/10 text-destructive border-destructive/20',
+  low: 'bg-primary/10 text-primary border-primary/20',
+  medium: 'bg-accent text-accent-foreground border-accent',
+  high: 'bg-destructive/30 text-destructive-foreground border-destructive/40',
+  urgent: 'bg-destructive text-destructive-foreground border-destructive',
 };
 
 export function TaskItem({
@@ -63,7 +63,7 @@ export function TaskItem({
       className={cn(
         'py-3 transition-all hover:shadow-md',
         completed && 'opacity-60',
-        isOverdue && !completed && 'border-red-500/50'
+        isOverdue && !completed && 'border-destructive/50'
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -96,7 +96,7 @@ export function TaskItem({
               <div
                 className={cn(
                   'text-muted-foreground flex items-center gap-1 text-xs',
-                  isOverdue && !completed && 'text-red-600 dark:text-red-400'
+                  isOverdue && !completed && 'text-destructive'
                 )}
               >
                 {isOverdue && !completed && <AlertCircle className="h-3 w-3" />}
