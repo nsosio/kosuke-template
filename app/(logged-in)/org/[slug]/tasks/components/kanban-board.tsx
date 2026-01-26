@@ -23,6 +23,7 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server';
 
 import { KanbanTaskCard } from '@/app/(logged-in)/org/[slug]/tasks/components/kanban-task-card';
+import { kanbanColumns } from '@/app/(logged-in)/org/[slug]/tasks/utils';
 
 import type { AppRouter } from '@/lib/trpc/router';
 import type { TaskPriority } from '@/lib/types';
@@ -42,12 +43,6 @@ interface KanbanBoardProps {
   onPriorityChange: (input: UpdateTaskInput) => void;
   onToggleComplete: (input: UpdateTaskInput) => void;
 }
-
-const PRIORITY_COLUMNS: { id: TaskPriority; title: string }[] = [
-  { id: 'low', title: 'Low Priority' },
-  { id: 'medium', title: 'Medium Priority' },
-  { id: 'high', title: 'High Priority' },
-];
 
 function DroppableColumn({
   column,
@@ -148,7 +143,7 @@ export function KanbanBoard({
     );
 
     // Ensure all priorities have arrays
-    PRIORITY_COLUMNS.forEach((column) => {
+    kanbanColumns.forEach((column) => {
       if (!grouped[column.id]) {
         grouped[column.id] = [];
       }
@@ -180,7 +175,7 @@ export function KanbanBoard({
     let newPriority: TaskPriority;
 
     // Check if dropped over a column or a task
-    if (PRIORITY_COLUMNS.some((col) => col.id === over.id)) {
+    if (kanbanColumns.some((col) => col.id === over.id)) {
       // Dropped directly on column
       newPriority = over.id as TaskPriority;
     } else {
@@ -208,8 +203,8 @@ export function KanbanBoard({
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {PRIORITY_COLUMNS.map((column) => {
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {kanbanColumns.map((column) => {
           const columnTasks = tasksByPriority[column.id] || [];
           const draggedTask = activeId ? tasks.find((t) => t.id === activeId) : null;
           const isOverColumn =
