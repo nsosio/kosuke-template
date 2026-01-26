@@ -56,7 +56,7 @@ export function KanbanTaskCard({ task, onEdit, onDelete, onToggleComplete }: Kan
         'relative cursor-grab py-4 transition-all duration-200 active:cursor-grabbing',
         isDragging && 'opacity-50 shadow-lg',
         isCompleted && 'opacity-60',
-        isUrgent && !isCompleted && 'border-red-600/50 bg-red-50/30 dark:bg-red-950/20',
+        isUrgent && !isCompleted && 'border-destructive/50 bg-destructive/5',
         'hover:shadow-md'
       )}
       {...attributes}
@@ -88,9 +88,7 @@ export function KanbanTaskCard({ task, onEdit, onDelete, onToggleComplete }: Kan
             checked={task.completed}
             onCheckedChange={() => onToggleComplete({ id: task.id, completed: !task.completed })}
           />
-          {isUrgent && !isCompleted && (
-            <AlertTriangle className="h-4 w-4 text-red-600 dark:text-red-400" />
-          )}
+          {isUrgent && !isCompleted && <AlertTriangle className="text-destructive h-4 w-4" />}
           <h4 className={cn('text-sm leading-tight font-medium')}>{task.title}</h4>
         </div>
         {task.description && (
