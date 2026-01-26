@@ -3,7 +3,7 @@
  * Handles CRUD operations for the todo list with server-side filtering
  */
 import { TRPCError } from '@trpc/server';
-import { and, desc, eq, ilike, isNull, or } from 'drizzle-orm';
+import { and, desc, eq, ilike, isNull, or, sql } from 'drizzle-orm';
 
 import { db } from '@/lib/db/drizzle';
 import { tasks } from '@/lib/db/schema';
@@ -55,7 +55,15 @@ export const tasksRouter = router({
       .select()
       .from(tasks)
       .where(and(...conditions))
-      .orderBy(desc(tasks.createdAt));
+      .orderBy(
+        sql`CASE ${tasks.priority}
+          WHEN 'urgent' THEN 1
+          WHEN 'high' THEN 2
+          WHEN 'medium' THEN 3
+          WHEN 'low' THEN 4
+        END`,
+        desc(tasks.createdAt)
+      );
 
     // Transform to proper types
     return userTasks.map((task) => ({
