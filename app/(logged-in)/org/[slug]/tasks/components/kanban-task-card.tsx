@@ -87,9 +87,7 @@ export function KanbanTaskCard({ task, onEdit, onDelete, onToggleComplete }: Kan
             onCheckedChange={() => onToggleComplete({ id: task.id, completed: !task.completed })}
           />
           <div className="flex flex-1 items-center gap-1">
-            {task.priority === 'urgent' && (
-              <Flame className="h-4 w-4 shrink-0 text-pink-600 dark:text-pink-400" />
-            )}
+            {task.priority === 'urgent' && <Flame className="text-destructive h-4 w-4 shrink-0" />}
             <h4 className={cn('text-sm leading-tight font-medium')}>{task.title}</h4>
           </div>
         </div>
