@@ -46,6 +46,7 @@ export function KanbanTaskCard({ task, onEdit, onDelete, onToggleComplete }: Kan
 
   const isCompleted = task.completed;
   const isOverdue = task.dueDate && new Date(task.dueDate) < new Date() && !isCompleted;
+  const isUrgent = task.priority === 'urgent';
 
   return (
     <Card
@@ -55,7 +56,8 @@ export function KanbanTaskCard({ task, onEdit, onDelete, onToggleComplete }: Kan
         'relative cursor-grab py-4 transition-all duration-200 active:cursor-grabbing',
         isDragging && 'opacity-50 shadow-lg',
         isCompleted && 'opacity-60',
-        'hover:shadow-md'
+        'hover:shadow-md',
+        isUrgent && 'border-l-4 border-l-orange-500'
       )}
       {...attributes}
       {...listeners}

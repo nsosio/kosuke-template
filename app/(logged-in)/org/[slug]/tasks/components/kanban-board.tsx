@@ -44,9 +44,10 @@ interface KanbanBoardProps {
 }
 
 const PRIORITY_COLUMNS: { id: TaskPriority; title: string }[] = [
-  { id: 'low', title: 'Low Priority' },
-  { id: 'medium', title: 'Medium Priority' },
+  { id: 'urgent', title: 'Urgent Priority' },
   { id: 'high', title: 'High Priority' },
+  { id: 'medium', title: 'Medium Priority' },
+  { id: 'low', title: 'Low Priority' },
 ];
 
 function DroppableColumn({
@@ -133,7 +134,7 @@ export function KanbanBoard({
     })
   );
 
-  // Group tasks by priority
+  // Group tasks by priority with urgent tasks at the top
   const tasksByPriority = useMemo(() => {
     const grouped = tasks.reduce(
       (acc, task) => {
@@ -152,6 +153,20 @@ export function KanbanBoard({
       if (!grouped[column.id]) {
         grouped[column.id] = [];
       }
+    });
+
+    // Sort tasks within each column to show urgent tasks at the top
+    const priorityOrder: Record<TaskPriority, number> = {
+      urgent: 0,
+      high: 1,
+      medium: 2,
+      low: 3,
+    };
+
+    Object.keys(grouped).forEach((priority) => {
+      grouped[priority as TaskPriority].sort((a, b) => {
+        return priorityOrder[a.priority] - priorityOrder[b.priority];
+      });
     });
 
     return grouped;
@@ -208,7 +223,7 @@ export function KanbanBoard({
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
         {PRIORITY_COLUMNS.map((column) => {
           const columnTasks = tasksByPriority[column.id] || [];
           const draggedTask = activeId ? tasks.find((t) => t.id === activeId) : null;
