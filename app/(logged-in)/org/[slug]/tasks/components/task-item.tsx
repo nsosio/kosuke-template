@@ -4,7 +4,9 @@ import { useState } from 'react';
 
 import type { inferRouterInputs } from '@trpc/server';
 import { format } from 'date-fns';
-import { AlertCircle, Calendar, MoreVertical, Pencil, Trash2 } from 'lucide-react';
+import { AlertCircle, Calendar, Flame, MoreVertical, Pencil, Trash2 } from 'lucide-react';
+
+import { priorityColors } from '@/app/(logged-in)/org/[slug]/tasks/utils';
 
 import type { AppRouter } from '@/lib/trpc/router';
 import type { TaskPriority } from '@/lib/types';
@@ -36,12 +38,6 @@ interface TaskItemProps {
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
 }
-
-const priorityColors = {
-  low: 'bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20',
-  medium: 'bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20',
-  high: 'bg-red-500/10 text-red-700 dark:text-red-400 border-red-500/20',
-};
 
 export function TaskItem({
   id,
@@ -88,7 +84,11 @@ export function TaskItem({
             </p>
           )}
           <div className="flex items-center gap-2 pt-1">
-            <Badge variant="outline" className={priorityColors[priority]}>
+            <Badge
+              variant="outline"
+              className={cn('flex items-center gap-1', priorityColors[priority])}
+            >
+              {priority === 'urgent' && <Flame className="h-3 w-3" />}
               {priority}
             </Badge>
             {dueDate && (

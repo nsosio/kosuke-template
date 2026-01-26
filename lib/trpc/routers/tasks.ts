@@ -55,7 +55,7 @@ export const tasksRouter = router({
       .select()
       .from(tasks)
       .where(and(...conditions))
-      .orderBy(desc(tasks.createdAt));
+      .orderBy(desc(tasks.priority), desc(tasks.createdAt));
 
     // Transform to proper types
     return userTasks.map((task) => ({
