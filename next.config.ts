@@ -45,7 +45,7 @@ const nextConfig: NextConfig = {
     }
     return config;
   },
-};
+},,,;
 
 // Only apply Sentry configuration in production
 const finalConfig =
